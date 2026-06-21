@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports | Connexio Executive Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(30, 58, 138, 0.08) 0%, rgba(30, 58, 138, 0) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg text-body-lg antialiased">
+<!-- THE SOURCE OF TRUTH: Shared Components Integration -->
+<!-- SideNavBar -->
+<aside class="w-[72px] h-screen fixed left-0 top-0 bg-surface/70 backdrop-blur-xl border-r border-white/10 shadow-[0px_4px_20px_rgba(30,58,138,0.05)] flex flex-col items-center py-lg z-50">
+<div class="mb-xl">
+<span class="material-symbols-outlined text-primary font-headline-lg text-headline-lg font-bold">account_balance</span>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<button class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary">
+<span class="material-symbols-outlined">inventory_2</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary">
+<span class="material-symbols-outlined">warning</span>
+</button>
+<!-- Reports Active State -->
+<button class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 text-primary border-r-2 border-primary bg-primary/5">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</nav>
+<div class="flex flex-col gap-xs mt-auto">
+<button class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant/60 hover:text-primary">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg text-on-surface-variant/60 hover:text-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-[72px] right-0 h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant/20 z-40 flex justify-between items-center px-xl">
+<div class="flex items-center gap-lg">
+<span class="font-title-md text-title-md font-black text-primary">Connexio</span>
+<div class="flex gap-md">
+<a class="text-on-surface-variant font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="#">Directives</a>
+<a class="text-on-surface-variant font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="#">Thresholds</a>
+<a class="text-on-surface-variant font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="#">Assets</a>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">history</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">dark_mode</span>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-xs">
+<div class="text-right hidden sm:block">
+<p class="font-label-caps text-label-caps text-primary leading-tight">Marcus Thorne</p>
+<p class="text-[10px] text-on-surface-variant/70 uppercase tracking-tighter">Executive Director</p>
+</div>
+<img alt="Marcus Thorne" class="w-10 h-10 rounded-full border-2 border-primary/20 object-cover" data-alt="A professional close-up portrait of a senior executive male with a refined appearance. He is wearing a tailored navy suit and a white shirt, set against a blurred, high-end office background with soft bokeh lighting. The overall mood is authoritative and sophisticated, perfectly aligned with a luxury corporate enterprise UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjCJ6E4X0-aheY6UBpLD7kXC1B1mP6WMjsZTOJZB1joxApFffTj07qiZqK44XUrlXxdBX9mEAzQ4eoxMZ2uHHmT7OIXLboG3BMpmnoYUH-irJ8_12LfB-CCdSSWjacojFWSzj8Lu2TKf0QJ5NqeY2Pgc7Xqsu44iLAOTWSK5RmyFcrTJf8dy_yhi-IOwPvjQ4KL-cVAIciI0i43SlA0nIz8EU4ECVNzLp7rwaA-Y6v54vN2fLtJWE_cvB0I8HIhXUZUqqLZs_wC8I"/>
+</div>
+<button class="bg-primary text-on-primary px-md py-xs rounded-lg font-label-caps text-label-caps hover:bg-primary-container transition-all active:scale-95">Execute Task</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[72px] mt-16 p-xl max-w-container-max mx-auto">
+<!-- Page Header -->
+<header class="mb-xl flex justify-between items-end">
+<div>
+<p class="font-label-caps text-label-caps text-secondary uppercase tracking-widest mb-base">Enterprise Intelligence</p>
+<h1 class="font-headline-lg text-headline-lg font-black text-primary tracking-tight">Operational Intelligence</h1>
+</div>
+<div class="flex gap-xs">
+<button class="flex items-center gap-xs px-md py-xs border border-outline-variant rounded-lg font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                    Last 30 Days
+                </button>
+<button class="flex items-center gap-xs px-md py-xs border border-outline-variant rounded-lg font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Filters
+                </button>
+<button class="flex items-center gap-xs px-md py-xs bg-primary text-on-primary rounded-lg font-label-caps text-label-caps hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    New Report
+                </button>
+</div>
+</header>
+<!-- Quick Access Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-xl">
+<!-- Inventory Lifecycle -->
+<div class="glass-card p-lg rounded-xl shadow-[0px_4px_20px_rgba(30,58,138,0.05)] hover:-translate-y-1 transition-all group">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">cycle</span>
+</div>
+<span class="text-blue-600 material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-primary mb-base">Inventory Lifecycle</h3>
+<p class="text-body-sm text-on-surface-variant/70 mb-lg">End-to-end tracking of modem and STB utility cycles.</p>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-secondary">Updated 2h ago</span>
+</div>
+</div>
+<!-- Technician Performance -->
+<div class="glass-card p-lg rounded-xl shadow-[0px_4px_20px_rgba(30,58,138,0.05)] hover:-translate-y-1 transition-all group">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">engineering</span>
+</div>
+<span class="text-blue-600 material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-primary mb-base">Technician Performance</h3>
+<p class="text-body-sm text-on-surface-variant/70 mb-lg">Efficiency metrics and SLA compliance by region.</p>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-secondary">Updated 5h ago</span>
+</div>
+</div>
+<!-- Damage Analysis -->
+<div class="glass-card p-lg rounded-xl shadow-[0px_4px_20px_rgba(30,58,138,0.05)] hover:-translate-y-1 transition-all group border-l-4 border-l-on-tertiary-container">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-on-tertiary-container/10 flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined">construction</span>
+</div>
+<span class="text-blue-600 material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-primary mb-base">Damage Analysis</h3>
+<p class="text-body-sm text-on-surface-variant/70 mb-lg">Critical analysis of hardware failure and return rates.</p>
+<div class="bg-on-tertiary-container/10 px-xs py-1 rounded text-[10px] font-bold text-on-tertiary-container inline-block uppercase">Critical Review</div>
+</div>
+<!-- Deployment ROI -->
+<div class="glass-card p-lg rounded-xl shadow-[0px_4px_20px_rgba(30,58,138,0.05)] hover:-translate-y-1 transition-all group">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-blue-600 material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-primary mb-base">Deployment ROI</h3>
+<p class="text-body-sm text-on-surface-variant/70 mb-lg">Revenue mapping against asset deployment costs.</p>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-secondary">Monthly Cycle</span>
+</div>
+</div>
+</section>
+<!-- Data Visualization Section -->
+<section class="mb-xl">
+<div class="glass-card rounded-xl p-lg shadow-[0px_4px_20px_rgba(30,58,138,0.05)]">
+<div class="flex justify-between items-center mb-xl">
+<div>
+<h2 class="font-title-md text-title-md font-bold text-primary">Deployment vs. Return Trends</h2>
+<p class="text-body-sm text-on-surface-variant/60">Enterprise aggregate asset velocity (12 Months)</p>
+</div>
+<div class="flex gap-md items-center">
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-body-sm text-on-surface-variant">Deployments</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-body-sm text-on-surface-variant">Returns</span>
+</div>
+</div>
+</div>
+<!-- Mock Chart Area -->
+<div class="h-[300px] w-full relative overflow-hidden border-b border-outline-variant/10">
+<svg class="w-full h-full preserve-3d" viewbox="0 0 1000 300">
+<!-- Deployment Line -->
+<path d="M0,250 Q100,220 200,240 T400,180 T600,160 T800,120 T1000,80" fill="none" stroke="#00236f" stroke-linecap="round" stroke-width="4"></path>
+<!-- Return Line -->
+<path d="M0,280 Q100,270 200,275 T400,250 T600,240 T800,245 T1000,230" fill="none" stroke="#1960a3" stroke-dasharray="8 4" stroke-linecap="round" stroke-width="4"></path>
+<!-- Gradient Fill for Deployment -->
+<path d="M0,250 Q100,220 200,240 T400,180 T600,160 T800,120 T1000,80 V300 H0 Z" fill="url(#blue-grad)" opacity="0.1"></path>
+<defs>
+<lineargradient id="blue-grad" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#00236f;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#00236f;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-md px-base text-on-surface-variant/50 font-label-caps text-label-caps uppercase tracking-tighter">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Detail Table Section -->
+<section class="glass-card rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,58,138,0.05)]">
+<div class="p-lg border-b border-outline-variant/10 flex justify-between items-center">
+<h2 class="font-title-md text-title-md font-bold text-primary">Generated Reports History</h2>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50">search</span>
+<input class="pl-10 pr-md py-xs bg-surface-container rounded-lg border-none focus:ring-2 focus:ring-primary/20 text-body-sm w-64" placeholder="Search archives..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container/30">
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">Report Name</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">Type</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">Generated By</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">Date</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">Format</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-lg py-md">
+<p class="font-body-lg text-body-lg text-primary font-bold">Q3 Logistics Audit</p>
+<p class="text-[12px] text-on-surface-variant/60">ID: CNX-2024-081</p>
+</td>
+<td class="px-lg py-md">
+<span class="bg-secondary-container/20 text-on-secondary-container px-xs py-1 rounded text-body-sm">Compliance</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">MT</div>
+<span class="text-body-sm">Marcus Thorne</span>
+</div>
+</td>
+<td class="px-lg py-md text-body-sm text-on-surface-variant">Oct 12, 2024</td>
+<td class="px-lg py-md">
+<span class="material-symbols-outlined text-error text-[20px] align-middle mr-1">picture_as_pdf</span>
+<span class="text-body-sm font-mono-data">PDF</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-lg py-md">
+<p class="font-body-lg text-body-lg text-primary font-bold">Modem Velocity Report</p>
+<p class="text-[12px] text-on-surface-variant/60">ID: CNX-2024-079</p>
+</td>
+<td class="px-lg py-md">
+<span class="bg-surface-container-high text-on-surface-variant px-xs py-1 rounded text-body-sm">Operational</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center text-[10px] font-bold text-secondary">SL</div>
+<span class="text-body-sm">Sarah Linn</span>
+</div>
+</td>
+<td class="px-lg py-md text-body-sm text-on-surface-variant">Oct 10, 2024</td>
+<td class="px-lg py-md">
+<span class="material-symbols-outlined text-green-600 text-[20px] align-middle mr-1">table_view</span>
+<span class="text-body-sm font-mono-data">XLSX</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-lg py-md">
+<p class="font-body-lg text-body-lg text-primary font-bold">STB Failure Root Cause</p>
+<p class="text-[12px] text-on-surface-variant/60">ID: CNX-2024-074</p>
+</td>
+<td class="px-lg py-md">
+<span class="bg-error-container/20 text-error px-xs py-1 rounded text-body-sm">Technical</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">JD</div>
+<span class="text-body-sm">John Doe</span>
+</div>
+</td>
+<td class="px-lg py-md text-body-sm text-on-surface-variant">Oct 05, 2024</td>
+<td class="px-lg py-md">
+<span class="material-symbols-outlined text-error text-[20px] align-middle mr-1">picture_as_pdf</span>
+<span class="text-body-sm font-mono-data">PDF</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-lg border-t border-outline-variant/10 flex justify-between items-center bg-surface/50">
+<span class="text-body-sm text-on-surface-variant/70">Showing 1-10 of 42 archived reports</span>
+<div class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant/20 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary font-label-caps text-label-caps">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant/20 hover:bg-surface-container transition-all font-label-caps text-label-caps">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant/20 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Micro-interaction: Chart line animation on load
+        window.addEventListener('load', () => {
+            const paths = document.querySelectorAll('path');
+            paths.forEach(path => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                path.style.transition = 'stroke-dashoffset 2s ease-out';
+                setTimeout(() => {
+                    path.style.strokeDashoffset = '0';
+                }, 100);
+            });
+        });
+
+        // Search highlight interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

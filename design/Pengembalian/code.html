@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Connexio - Pengembalian Perangkat</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-tint": "#1960a3",
+                "primary-fixed-dim": "#a2c9ff",
+                "on-error-container": "#93000a",
+                "secondary-fixed-dim": "#b8c8e0",
+                "on-surface": "#181c1e",
+                "secondary-fixed": "#d4e4fc",
+                "surface-container-high": "#e5e9eb",
+                "surface-variant": "#e0e3e5",
+                "on-primary-fixed-variant": "#004881",
+                "on-primary": "#ffffff",
+                "surface-bright": "#f7fafc",
+                "surface-container-low": "#f1f4f6",
+                "on-background": "#181c1e",
+                "on-secondary-fixed": "#0d1c2e",
+                "on-tertiary-fixed": "#0f1d2a",
+                "inverse-surface": "#2d3133",
+                "secondary": "#515f74",
+                "surface": "#f7fafc",
+                "on-primary-fixed": "#001c38",
+                "on-surface-variant": "#414750",
+                "primary-fixed": "#d3e4ff",
+                "on-secondary-fixed-variant": "#39485c",
+                "on-secondary": "#ffffff",
+                "inverse-primary": "#a2c9ff",
+                "tertiary": "#465363",
+                "on-tertiary": "#ffffff",
+                "tertiary-container": "#5e6b7b",
+                "background": "#f7fafc",
+                "surface-container-lowest": "#ffffff",
+                "on-error": "#ffffff",
+                "outline": "#727782",
+                "surface-container-highest": "#e0e3e5",
+                "outline-variant": "#c1c7d2",
+                "surface-container": "#ebeef0",
+                "surface-dim": "#d7dadc",
+                "primary-container": "#2b6cb0",
+                "on-tertiary-container": "#dfecff",
+                "tertiary-fixed": "#d6e4f7",
+                "inverse-on-surface": "#eef1f3",
+                "tertiary-fixed-dim": "#bac8da",
+                "on-tertiary-fixed-variant": "#3b4857",
+                "on-primary-container": "#e1ecff",
+                "error-container": "#ffdad6",
+                "error": "#ba1a1a",
+                "secondary-container": "#d1e1fa",
+                "primary": "#005394",
+                "on-secondary-container": "#556479"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "24px",
+                "xl": "64px",
+                "margin-mobile": "16px",
+                "sm": "12px",
+                "md": "24px",
+                "lg": "40px",
+                "margin-desktop": "48px",
+                "base": "8px",
+                "xs": "4px"
+            },
+            "fontFamily": {
+                "label-sm": ["Inter"],
+                "body-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-md": ["Inter"],
+                "title-lg": ["Inter"],
+                "display-lg": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "label-md": ["Inter"],
+                "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .executive-shadow {
+            box-shadow: 0px 4px 20px rgba(43, 108, 176, 0.05);
+        }
+        input, select, textarea {
+            transition: all 0.2s ease-in-out;
+        }
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 0 4px rgba(43, 108, 176, 0.1);
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#005394] px-margin-mobile py-4 rounded-b-3xl shadow-lg">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3 text-white">
+<div class="w-12 h-12 rounded-full border-2 border-white/30 overflow-hidden">
+<img alt="Technician" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD36AtkvcpHCWfhAo48DtUPgaQSoDgPfDajZ6_qgaUoZ3CJltNjg1VNtCFaT7EKIllPaNoc6GnVu-3COtIUgpNGNoeFJ1-75mnfwLBucZw8TWyCn2eS_lBr2uPQtSP5ToT0z7kv8RIPvIwHm7N83BYk58AUx3Gqj0XXmyFEAMYBz0Ip8hYgEaErwMioED4eT0znKbGybSZ2u_6aDs-UmQhEOpXhBZeLnU-M6mvLKGoEh_2u3sthJhNZRh8BeFpIG8G-zs2gtHUT9wE"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">Budi Santoso</span>
+<span class="text-[11px] opacity-80">Area: Jakarta Pusat</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-md text-white font-bold mr-2">Connexio</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="mt-28 px-margin-mobile max-w-2xl mx-auto space-y-lg">
+<!-- Header Section -->
+<section class="fade-in pt-4"><h2 class="text-[24px] font-bold text-[#005394] leading-tight">Pengembalian Perangkat Rusak</h2>
+<div class="h-1 w-12 bg-[#005394] mt-2 rounded-full"></div>
+<p class="font-body-md text-on-surface-variant mt-4">Lengkapi data di bawah ini untuk memproses retur perangkat ke logistik.</p></section>
+<!-- Form Section -->
+<form class="space-y-6 fade-in" style="animation-delay: 0.1s;">
+<!-- ID Pelanggan -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant ml-1" for="id-pelanggan">ID Pelanggan</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-[56px] pl-12 pr-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none executive-shadow font-body-md text-body-md" id="id-pelanggan" placeholder="Cari ID atau Nama Pelanggan..." type="text"/>
+</div>
+</div>
+<!-- Serial Number -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant ml-1" for="sn-perangkat">Pilih Serial Number Alat</label>
+<div class="relative group">
+<input class="w-full h-[56px] px-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none executive-shadow font-body-md text-body-md" id="sn-perangkat" placeholder="Masukkan Serial Number (SN)..." type="text"/>
+</div>
+</div>
+<!-- Alasan -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant ml-1" for="alasan">Alasan Pengembalian/Kerusakan</label>
+<textarea class="w-full p-4 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none executive-shadow font-body-md text-body-md resize-none" id="alasan" placeholder="Contoh: Port LAN mati, terkena petir, redaman tinggi..." rows="4"></textarea>
+</div>
+<!-- Photo Upload -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant ml-1">Bukti Foto Kerusakan</label>
+<div class="relative group cursor-pointer" id="upload-container">
+<input accept="image/*" class="hidden" id="photo-upload" type="file"/>
+<label class="flex flex-col items-center justify-center w-full h-[180px] bg-white border-2 border-dashed border-outline-variant rounded-xl executive-shadow group-hover:border-primary group-hover:bg-primary/5 transition-all duration-300" for="photo-upload">
+<span class="material-symbols-outlined text-primary text-[48px] mb-base">photo_camera</span>
+<span class="font-label-md text-label-md text-secondary group-hover:text-primary">Ambil Foto Fisik Barang Rusak</span>
+</label>
+<div class="hidden absolute inset-0 bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant" id="preview-area">
+<div class="relative w-full h-full">
+<img alt="Preview" class="w-full h-full object-cover" id="img-preview" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgcng9IjgiIGZpbGw9IiNlOGVhZWQiLz48cGF0aCBkPSJNMTcwIDEzMCBsMzAgNDAgbDIwLTE1IGw0MCA1NSBIMTQweiIgZmlsbD0iI2JkYzFjNiIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjEyMCIgcj0iMTgiIGZpbGw9IiNiZGMxYzYiLz48L3N2Zz4="/>
+<button class="absolute top-2 right-2 bg-error text-on-error p-2 rounded-full shadow-lg" id="remove-photo" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-4"><button class="w-full h-[56px] bg-[#005394] text-white font-label-md rounded-xl hover:bg-[#004276] active:scale-[0.98] transition-all duration-150 shadow-md flex items-center justify-center gap-3" type="submit">
+<span class="material-symbols-outlined">send</span>
+  Ajukan Pengembalian Ke Admin
+</button></div>
+</form>
+</main>
+<!-- BottomNavBar (Matches SCREEN_9) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-white border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-2 hover:bg-surface-container-high rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-2 hover:bg-surface-container-high rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-sm text-label-sm">Request</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#D3E4FF] text-[#005394] rounded-xl px-4 py-2 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">assignment_return</span>
+<span class="font-label-sm text-label-sm">Return</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-2 hover:bg-surface-container-high rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-label-sm text-label-sm">Dismantle</span>
+</a>
+</nav>
+<script>
+    // Photo preview logic
+    const photoInput = document.getElementById('photo-upload');
+    const previewArea = document.getElementById('preview-area');
+    const imgPreview = document.getElementById('img-preview');
+    const removePhotoBtn = document.getElementById('remove-photo');
+
+    photoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imgPreview.src = event.target.result;
+                previewArea.classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    removePhotoBtn.addEventListener('click', function() {
+        photoInput.value = '';
+        imgPreview.src = '';
+        previewArea.classList.add('hidden');
+    });
+
+    // Form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalContent = btn.innerHTML;
+        
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Memproses...';
+        btn.disabled = true;
+        btn.classList.add('opacity-80');
+
+        setTimeout(() => {
+            alert('Pengembalian berhasil diajukan! Menunggu verifikasi admin.');
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+            btn.classList.remove('opacity-80');
+            e.target.reset();
+            previewArea.classList.add('hidden');
+        }, 1500);
+    });
+</script>
+</body></html>

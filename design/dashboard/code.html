@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Connexio - Dashboard Teknisi</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-container": "#5e6b7b",
+                "tertiary-fixed": "#d6e4f7",
+                "secondary-fixed": "#d4e4fc",
+                "secondary-container": "#d1e1fa",
+                "surface-container-low": "#f1f4f6",
+                "on-primary-fixed-variant": "#004881",
+                "outline": "#727782",
+                "on-tertiary-fixed-variant": "#3b4857",
+                "surface-container": "#ebeef0",
+                "secondary": "#515f74",
+                "error-container": "#ffdad6",
+                "primary": "#005394",
+                "on-primary-fixed": "#001c38",
+                "on-secondary-container": "#556479",
+                "on-error": "#ffffff",
+                "on-secondary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-dim": "#d7dadc",
+                "on-tertiary-container": "#dfecff",
+                "on-tertiary": "#ffffff",
+                "primary-fixed-dim": "#a2c9ff",
+                "on-background": "#181c1e",
+                "primary-container": "#2b6cb0",
+                "surface": "#f7fafc",
+                "on-tertiary-fixed": "#0f1d2a",
+                "primary-fixed": "#d3e4ff",
+                "on-surface-variant": "#414750",
+                "surface-tint": "#1960a3",
+                "inverse-on-surface": "#eef1f3",
+                "surface-container-lowest": "#ffffff",
+                "surface-variant": "#e0e3e5",
+                "on-surface": "#181c1e",
+                "surface-bright": "#f7fafc",
+                "tertiary": "#465363",
+                "surface-container-highest": "#e0e3e5",
+                "tertiary-fixed-dim": "#bac8da",
+                "surface-container-high": "#e5e9eb",
+                "inverse-primary": "#a2c9ff",
+                "on-secondary-fixed": "#0d1c2e",
+                "secondary-fixed-dim": "#b8c8e0",
+                "error": "#ba1a1a",
+                "inverse-surface": "#2d3133",
+                "on-primary-container": "#e1ecff",
+                "on-primary": "#ffffff",
+                "background": "#f7fafc",
+                "outline-variant": "#c1c7d2",
+                "on-secondary-fixed-variant": "#39485c"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "margin-desktop": "48px",
+                "lg": "40px",
+                "sm": "12px",
+                "xs": "4px",
+                "xl": "64px",
+                "base": "8px",
+                "md": "24px",
+                "gutter": "24px",
+                "margin-mobile": "16px"
+        },
+        "fontFamily": {
+                "title-lg": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "label-sm": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-md": ["Inter"],
+                "label-md": ["Inter"],
+                "display-lg": ["Inter"]
+        },
+        "fontSize": {
+                "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+        }
+      },
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .executive-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 83, 148, 0.08);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        .accordion-content.active {
+            max-height: 800px;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 px-margin-mobile py-4 bg-white border-b border-surface-container-high">
+<div class="flex justify-between items-center max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+<img alt="Budi Santoso" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD46eK0oBVq6M-mmNbYH7J2mDoD8J7OCL6HZYU__iOCzYj1Wwz3LBIQEltrpXsDLCvT0TGmB0_ikGXOypeFkmnaBp1nvD7djh98mK9aQtr6u_ttiqAGofzYVHih5klrdCrce-P2aeewc92qsaE42p1CLBrlUFrGZPqjLrweB2mQla9j6w969xy9r906hmg5-HBnzbOsCnnXcOyxh4bIq_kF6xOkBgwknC9b6BhawSzRaxG7kRPexZvQPTyx1lgxUzsraDRb1_t3jkE"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md leading-tight">Budi Santoso</span>
+<span class="text-[11px] text-on-surface-variant">Jakarta Pusat</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="font-headline-md font-bold text-primary tracking-tight">Connexio</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="mt-24 px-margin-mobile md:px-margin-desktop space-y-lg max-w-7xl mx-auto">
+<!-- Welcome Section -->
+<section>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Overview Operasional</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Pantau status penugasan Anda hari ini.</p>
+</section>
+<!-- Analytics Row (Horizontal Scrolling) -->
+<section class="flex overflow-x-auto gap-4 pb-2 hide-scrollbar -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
+<!-- Pending Card -->
+<div class="flex-shrink-0 w-64 bg-white border border-outline-variant rounded-xl p-md executive-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-outline" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hari Ini</span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface">08</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Pending Tasks</div>
+</div>
+<!-- In Hand Card -->
+<div class="flex-shrink-0 w-64 bg-primary-container border border-primary text-white rounded-xl p-md executive-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-white" data-icon="engineering">engineering</span>
+<span class="font-label-sm text-label-sm opacity-80">Aktif</span>
+</div>
+<div class="font-display-lg text-display-lg">03</div>
+<div class="font-label-md text-label-md">In Hand Tasks</div>
+</div>
+<!-- Completed Card -->
+<div class="flex-shrink-0 w-64 bg-white border border-outline-variant rounded-xl p-md executive-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="task_alt">task_alt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Selesai</span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface">12</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Completed</div>
+</div>
+</section>
+<!-- Main List: Tugas Hari Ini -->
+<section class="space-y-md">
+<div class="flex justify-between items-end">
+<h3 class="font-title-lg text-title-lg text-on-surface">Tugas Hari Ini</h3>
+<button class="font-label-md text-label-md text-primary">Lihat Semua</button>
+</div>
+<div class="space-y-4">
+<!-- Card 1: Closed -->
+<div class="bg-white border border-outline-variant rounded-xl p-md executive-shadow cursor-pointer transition-all hover:border-primary/30" onclick="toggleAccordion(this)">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">John Doe</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">PLG-2026-089</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm">In Hand</span>
+<span class="material-symbols-outlined text-outline-variant transition-transform" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="accordion-content">
+<div class="border-t border-outline-variant pt-4 mt-4 space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Alamat</p>
+<p class="font-body-md text-body-md">Gedung Artha Graha Lt. 15, Jakarta</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tipe Tugas</p>
+<p class="font-body-md text-body-md">Maintenance Check</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Expanded -->
+<div class="bg-white border-2 border-primary rounded-xl p-md executive-shadow cursor-pointer" onclick="toggleAccordion(this)">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Jane Smith</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">PLG-2026-090</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full font-label-sm text-label-sm">Pending Admin</span>
+<span class="material-symbols-outlined text-primary transition-transform rotate-180" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="accordion-content active">
+<div class="border-t border-outline-variant pt-4 mt-4 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+                                    Alamat Pemasangan
+                                </p>
+<p class="font-body-md text-body-md">Jl. Sudirman No. 12, Jakarta</p>
+</div>
+<div class="space-y-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="settings_input_component">settings_input_component</span>
+                                    Tipe Penugasan
+                                </p>
+<p class="font-body-md text-body-md">Fiber Installation</p>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="relative h-32 rounded-lg bg-surface-container overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-10">
+<span class="material-symbols-outlined scale-[4]" data-icon="map">map</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent"></div>
+<div class="absolute bottom-2 left-2 px-2 py-1 bg-white/90 rounded border border-outline-variant font-label-sm text-[10px]">Preview Lokasi</div>
+</div>
+<div class="flex flex-col md:flex-row gap-3">
+<button class="flex-1 h-[48px] flex items-center justify-center gap-2 border border-primary text-primary rounded-xl font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+                                Buka Google Maps
+                            </button>
+<button class="flex-[1.5] h-[48px] flex items-center justify-center gap-2 bg-primary text-white rounded-xl font-label-md text-label-md shadow-lg shadow-primary/20 hover:bg-primary-container transition-all">
+                                Lanjutkan Pengerjaan
+                                <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Network Map Preview -->
+<section class="bg-white border border-outline-variant rounded-xl p-md executive-shadow overflow-hidden relative">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-lg text-title-lg text-on-surface">Network Topology</h3>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="fullscreen">fullscreen</span>
+</div>
+<div class="h-48 w-full bg-surface-container-low rounded-lg relative flex items-center justify-center">
+<!-- Blue Grid Pattern -->
+<div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#005394 1px, transparent 1px); background-size: 20px 20px;"></div>
+<!-- Nodes -->
+<div class="relative w-full h-full flex items-center justify-center gap-12">
+<div class="w-4 h-4 bg-primary rounded-full relative"><div class="absolute inset-0 animate-ping bg-primary rounded-full opacity-75"></div></div>
+<div class="h-[2px] w-16 bg-outline-variant"></div>
+<div class="w-4 h-4 bg-secondary-container rounded-full"></div>
+<div class="h-[2px] w-16 bg-outline-variant"></div>
+<div class="w-4 h-4 bg-primary rounded-full"></div>
+</div>
+<div class="absolute bottom-4 right-4 bg-primary text-white px-3 py-1 rounded-full font-label-sm text-[10px]">Active Nodes: 142/145</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<div class="fixed bottom-24 right-6">
+<button class="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-[28px]" data-icon="add">add</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-white border-t border-surface-container-high shadow-[0_-4px_16px_rgba(0,0,0,0.04)]">
+<a class="flex flex-col items-center justify-center gap-1 min-w-[72px] text-primary" href="#">
+<span class="material-symbols-outlined !text-[24px]">dashboard</span>
+<span class="text-[11px] font-medium">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 min-w-[72px] text-on-surface-variant" href="#">
+<span class="material-symbols-outlined !text-[24px]">assignment</span>
+<span class="text-[11px] font-medium">Request</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 min-w-[72px] text-on-surface-variant" href="#">
+<span class="material-symbols-outlined !text-[24px]">assignment_return</span>
+<span class="text-[11px] font-medium">Return</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 min-w-[72px] text-on-surface-variant" href="#">
+<span class="material-symbols-outlined !text-[24px]">build</span>
+<span class="text-[11px] font-medium">Dismantle</span>
+</a>
+</nav>
+<script>
+    function toggleAccordion(element) {
+        const content = element.querySelector('.accordion-content');
+        const icon = element.querySelector('[data-icon="expand_more"]');
+        
+        const isActive = content.classList.contains('active');
+        
+        if (isActive) {
+            content.classList.remove('active');
+            element.classList.remove('border-primary', 'border-2');
+            element.classList.add('border-outline-variant', 'border');
+            icon.classList.remove('rotate-180', 'text-primary');
+            icon.classList.add('text-outline-variant');
+        } else {
+            // Close others
+            document.querySelectorAll('.accordion-content').forEach(c => {
+                c.classList.remove('active');
+                const parent = c.closest('.executive-shadow');
+                parent.classList.remove('border-primary', 'border-2');
+                parent.classList.add('border-outline-variant', 'border');
+                const otherIcon = parent.querySelector('[data-icon="expand_more"]');
+                if (otherIcon) {
+                    otherIcon.classList.remove('rotate-180', 'text-primary');
+                    otherIcon.classList.add('text-outline-variant');
+                }
+            });
+
+            content.classList.add('active');
+            element.classList.remove('border-outline-variant', 'border');
+            element.classList.add('border-primary', 'border-2');
+            icon.classList.add('rotate-180', 'text-primary');
+            icon.classList.remove('text-outline-variant');
+        }
+    }
+</script>
+</body></html>

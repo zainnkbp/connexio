@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Request History - Connexio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e0e3e5",
+                    "on-error-container": "#93000a",
+                    "background": "#f7fafc",
+                    "on-secondary-container": "#556479",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#0d1c2e",
+                    "primary-fixed-dim": "#a2c9ff",
+                    "on-tertiary-fixed-variant": "#3b4857",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#d3e4ff",
+                    "on-surface-variant": "#414750",
+                    "tertiary-container": "#5e6b7b",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e5e9eb",
+                    "surface-container-highest": "#e0e3e5",
+                    "outline": "#727782",
+                    "secondary-container": "#d1e1fa",
+                    "outline-variant": "#c1c7d2",
+                    "secondary-fixed": "#d4e4fc",
+                    "primary": "#005394",
+                    "surface-container-low": "#f1f4f6",
+                    "on-tertiary-container": "#dfecff",
+                    "surface": "#f7fafc",
+                    "surface-container": "#ebeef0",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#d6e4f7",
+                    "inverse-on-surface": "#eef1f3",
+                    "on-primary-fixed": "#001c38",
+                    "tertiary": "#465363",
+                    "surface-tint": "#1960a3",
+                    "on-secondary-fixed-variant": "#39485c",
+                    "on-primary-container": "#e1ecff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#d7dadc",
+                    "on-surface": "#181c1e",
+                    "on-primary-fixed-variant": "#004881",
+                    "tertiary-fixed-dim": "#bac8da",
+                    "secondary": "#515f74",
+                    "secondary-fixed-dim": "#b8c8e0",
+                    "inverse-surface": "#2d3133",
+                    "inverse-primary": "#a2c9ff",
+                    "on-background": "#181c1e",
+                    "primary-container": "#2b6cb0",
+                    "on-tertiary-fixed": "#0f1d2a",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7fafc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "lg": "40px",
+                    "gutter": "24px",
+                    "md": "24px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .request-card-shadow {
+            box-shadow: 0px 4px 20px rgba(43, 108, 176, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface-container-lowest dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-mobile md:px-margin-desktop h-14">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Budi Santoso" data-alt="A professional close-up portrait of a technical infrastructure specialist in a clean, high-tech corporate environment. The lighting is soft and high-key, emphasizing a modern executive feel. The color palette is dominated by soft whites and professional slate blues, creating a calm and stable atmosphere suitable for a premium technician management application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJdoL8EKuC4E0K4Ddrb4KOkM-aGiyeawM8BdEBa-szW4zoYdv8QND-sucIFNDDalW961m8eqiEu9tFe9Q8phJjIndZPFn6MwBYiZ0G0Q4ICKDToSmoLHnmRVskFVF2ydvzUTylQKFqnI5EuwSB6NIUpyB1Oox1NAYuphnb8VbeE88i8RrZ8noKih2c8Pw76O2zVGm4_0rCtycBowdHQzPRqtCzXcuTcsR5AaN0zjevdImn9YR9zQjRwSaoKjmkfr6nSK9n2LHtvIA"/>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Connexio</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="px-margin-mobile pt-lg flex flex-col gap-md">
+<!-- Page Title & CTA -->
+<div class="flex flex-col gap-xs">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Request History</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Monitor your recent equipment deployments.</p>
+</div>
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform duration-200 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Request
+        </button>
+<!-- Search & Filter Bar (Minimalist) -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Search by ID or Item..." type="text"/>
+</div>
+<!-- History List -->
+<div class="flex flex-col gap-gutter">
+<!-- Request Card 1: Approved -->
+<div class="request-card-shadow bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-sm active:scale-[0.98] transition-all duration-150 cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">#REQ-20240501</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today • 10:45 AM</span>
+</div>
+<span class="px-3 py-1 bg-secondary-container text-primary font-label-sm text-label-sm rounded-full">Approved</span>
+</div>
+<div class="h-[1px] w-full bg-outline-variant opacity-30"></div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="router">router</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold">2 Items</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cisco ISR 4000, Fiber SFP</span>
+</div>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Request Card 2: Pending -->
+<div class="request-card-shadow bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-sm active:scale-[0.98] transition-all duration-150 cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">#REQ-20240498</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday • 02:15 PM</span>
+</div>
+<span class="px-3 py-1 bg-surface-container text-tertiary font-label-sm text-label-sm rounded-full">Pending</span>
+</div>
+<div class="h-[1px] w-full bg-outline-variant opacity-30"></div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="settings_input_component">settings_input_component</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold">5 Items</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cat6 Cabling, Wall Mounts...</span>
+</div>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Request Card 3: Processing -->
+<div class="request-card-shadow bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-sm active:scale-[0.98] transition-all duration-150 cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">#REQ-20240495</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">May 12 • 09:00 AM</span>
+</div>
+<span class="px-3 py-1 bg-primary-fixed-dim/20 text-on-primary-fixed-variant font-label-sm text-label-sm rounded-full">Processing</span>
+</div>
+<div class="h-[1px] w-full bg-outline-variant opacity-30"></div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="dns">dns</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold">1 Item</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Storage Array Module X2</span>
+</div>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Empty State Illustration Placeholder (Asymmetric layout helper) -->
+<div class="mt-md p-lg rounded-2xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-center opacity-60">
+<div class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center mb-base">
+<span class="material-symbols-outlined text-primary scale-150" data-icon="history">history</span>
+</div>
+<span class="font-title-lg text-title-lg text-primary">Review Archival Data</span>
+<p class="font-label-sm text-label-sm max-w-[200px] mt-xs">Requests older than 30 days are automatically moved to archive storage.</p>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - Contextual for Requests -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary-container text-on-primary shadow-xl rounded-2xl flex items-center justify-center active:scale-90 duration-150 z-50">
+<span class="material-symbols-outlined" data-icon="assignment_add">assignment_add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 bg-surface-container-lowest dark:bg-surface-dim px-2 pb-safe border-t border-outline-variant dark:border-outline">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="assignment_add" style="font-variation-settings: 'FILL' 1;">assignment_add</span>
+<span class="font-label-sm text-label-sm">Request</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="assignment_return">assignment_return</span>
+<span class="font-label-sm text-label-sm">Return</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+<span class="font-label-sm text-label-sm">Dismantle</span>
+</button>
+</nav>
+<script>
+        // Simple Micro-interaction for cards
+        document.querySelectorAll('.request-card-shadow').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.borderColor = '#005394';
+                setTimeout(() => {
+                    card.style.borderColor = '#c1c7d2';
+                }, 400);
+            });
+        });
+
+        // Atmospheric touch: Parallax subtle background movement
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.body.style.backgroundPosition = `0px ${scrolled * 0.1}px`;
+        });
+    </script>
+</body></html>

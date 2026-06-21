@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Request Perangkat Baru - TechOps</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#1960a3",
+                        "primary-fixed-dim": "#a2c9ff",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b8c8e0",
+                        "on-surface": "#181c1e",
+                        "secondary-fixed": "#d4e4fc",
+                        "surface-container-high": "#e5e9eb",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-fixed-variant": "#004881",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f7fafc",
+                        "surface-container-low": "#f1f4f6",
+                        "on-background": "#181c1e",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-tertiary-fixed": "#0f1d2a",
+                        "inverse-surface": "#2d3133",
+                        "secondary": "#515f74",
+                        "surface": "#f7fafc",
+                        "on-primary-fixed": "#001c38",
+                        "on-surface-variant": "#414750",
+                        "primary-fixed": "#d3e4ff",
+                        "on-secondary-fixed-variant": "#39485c",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#a2c9ff",
+                        "tertiary": "#465363",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#5e6b7b",
+                        "background": "#f7fafc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "outline": "#727782",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#c1c7d2",
+                        "surface-container": "#ebeef0",
+                        "surface-dim": "#d7dadc",
+                        "primary-container": "#2b6cb0",
+                        "on-tertiary-container": "#dfecff",
+                        "tertiary-fixed": "#d6e4f7",
+                        "inverse-on-surface": "#eef1f3",
+                        "tertiary-fixed-dim": "#bac8da",
+                        "on-tertiary-fixed-variant": "#3b4857",
+                        "on-primary-container": "#e1ecff",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d1e1fa",
+                        "primary": "#005394",
+                        "on-secondary-container": "#556479"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "xl": "64px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "margin-desktop": "48px",
+                        "base": "8px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .executive-shadow {
+            box-shadow: 0px 4px 20px rgba(43, 108, 176, 0.05);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-primary px-margin-mobile py-4 rounded-b-3xl shadow-lg">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3 text-white">
+<div class="w-12 h-12 rounded-full border-2 border-white/30 overflow-hidden">
+<img alt="Technician" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArriGEmA0iaGlSqRQ1V6DxxHN_y3_LfrON-d1dHKeikDU_U6JjPAotqCYbDqBGwvmUFyf7ZlWwg-UEvwGSMGJzllI7WIvJchhcUmQTqTIfDFPyFSd-ceEPUQSNcm0qXUQ5BQ59fDKfUjPPiEXLH84qyHeowwjAPxhw5QkGnI-PyFBJUewkyjJNLabMvKLpZOfo1hUw9XEhDkaGUEyVwg14NHkKNyzMImR20-ZZhTxB3civx2Lsf_GDb0vf7LpgnIyl99yqiDNKdEw"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">Budi Santoso</span>
+<span class="text-[11px] opacity-80">Area: Jakarta Pusat</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-md text-white font-bold mr-2">Connexio</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="mt-20 px-margin-mobile md:px-margin-desktop space-y-lg max-w-2xl mx-auto pb-32">
+<!-- Section Header -->
+<section class="pt-4">
+<p class="font-label-md text-label-md text-primary/70 uppercase tracking-widest mb-xs">FORM DEPLOYMENT</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Validasi Pengambilan Perangkat</h2>
+</section>
+<section class="space-y-md">
+<!-- Customer ID Input -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block px-1" for="customer_id">ID Pelanggan</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary transition-colors group-focus-within:text-primary-container" data-icon="search">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200 outline-none font-body-md text-body-md executive-shadow" id="customer_id" placeholder="Masukkan ID Pelanggan..." type="text"/>
+</div>
+<p class="font-label-sm text-label-sm text-secondary px-1 flex items-center gap-1.5 mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="info">info</span>
+                    Sistem akan mencocokkan data ke database
+                </p>
+</div>
+<!-- Approval Card -->
+<div class="space-y-4">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Daftar Permintaan Barang</h3>
+<span class="text-primary font-label-sm">2/2 Items</span>
+</div>
+<div class="space-y-3">
+<!-- Item 1: Modem -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-xl executive-shadow"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined">router</span></div><div><p class="font-label-md text-on-surface">Modem ZTE</p><p class="text-[12px] text-secondary">ID Pelanggan: [ID]</p></div></div></div>
+<!-- Item 2: STB -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-xl executive-shadow"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center"><span class="material-symbols-outlined">settings_input_hdmi</span></div><div><p class="font-label-md text-on-surface">STB Android TV</p><p class="text-[12px] text-secondary">ID Pelanggan: [ID]</p></div></div></div>
+<!-- Item 3: Patch Cord -->
+<!-- Item 4: Router -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-xl executive-shadow">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">wifi</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Router TP-Link</p>
+<p class="text-[12px] text-secondary">SN: 56781234</p>
+</div>
+</div>
+<button class="text-error">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Add Item Button -->
+<button class="w-full py-3 border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center gap-2 text-secondary hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-md">Tambah Item Baru</span>
+</button>
+</div>
+</div>
+<!-- Warehouse Visualization -->
+<div class="space-y-2">
+<p class="font-label-md text-label-md text-on-surface-variant block px-1">Lokasi Pengambilan</p>
+<div class="rounded-xl overflow-hidden relative h-[200px] w-full border border-outline-variant executive-shadow">
+<img alt="Warehouse visualization" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA4Cv8SQNzgLwuLJ8RPYaj6zjXgLKMVfyxVi6boZL-JfW9WBmoQQUPXX4Lyo7WDc0NjvjrSnYmyqXDLncDf3G3RQMkL4dojyHrgm_EzCAtHOxnnhsvuaSaG6AWOCpby6fn6IPMN1yKyCVhV9W_nMk1t4fIWBwHjOYHnNLNT04VMHPQIh2uscBePMGMTi2ucmiruLsMc6zHLbW5omMrPPMsmHiYKa0mWAIQ85a95qweir14-zASF-Jhory_siskJ32tt1Qsxne-Qtg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 via-transparent to-transparent flex items-end p-md">
+<p class="text-white font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-white" data-icon="location_on">location_on</span>
+                            Warehouse Area A - Rack 04
+                        </p>
+</div>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="pt-4">
+<button class="w-full h-[56px] bg-primary text-on-primary rounded-xl font-label-md text-body-md shadow-lg shadow-primary/20 hover:bg-primary-container active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-2">Kirim Permintaan Barang <span class="material-symbols-outlined" data-icon="send">send</span></button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl px-4 py-2 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm">Request</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_return">assignment_return</span>
+<span class="font-label-sm text-label-sm">Return</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-label-sm text-label-sm">Dismantle</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for input
+        const input = document.getElementById('customer_id');
+        input.addEventListener('focus', () => {
+            input.parentElement.parentElement.classList.add('scale-[1.01]');
+        });
+        input.addEventListener('blur', () => {
+            input.parentElement.parentElement.classList.remove('scale-[1.01]');
+        });
+
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md', 'backdrop-blur-md', 'bg-surface/90');
+            } else {
+                header.classList.remove('shadow-md', 'backdrop-blur-md', 'bg-surface/90');
+            }
+        });
+    </script>
+</body></html>

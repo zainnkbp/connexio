@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#1960a3",
+                    "primary-fixed-dim": "#a2c9ff",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#b8c8e0",
+                    "on-surface": "#181c1e",
+                    "secondary-fixed": "#d4e4fc",
+                    "surface-container-high": "#e5e9eb",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-fixed-variant": "#004881",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f7fafc",
+                    "surface-container-low": "#f1f4f6",
+                    "on-background": "#181c1e",
+                    "on-secondary-fixed": "#0d1c2e",
+                    "on-tertiary-fixed": "#0f1d2a",
+                    "inverse-surface": "#2d3133",
+                    "secondary": "#515f74",
+                    "surface": "#f7fafc",
+                    "on-primary-fixed": "#001c38",
+                    "on-surface-variant": "#414750",
+                    "primary-fixed": "#d3e4ff",
+                    "on-secondary-fixed-variant": "#39485c",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#a2c9ff",
+                    "tertiary": "#465363",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#5e6b7b",
+                    "background": "#f7fafc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "outline": "#727782",
+                    "surface-container-highest": "#e0e3e5",
+                    "outline-variant": "#c1c7d2",
+                    "surface-container": "#ebeef0",
+                    "surface-dim": "#d7dadc",
+                    "primary-container": "#2b6cb0",
+                    "on-tertiary-container": "#dfecff",
+                    "tertiary-fixed": "#d6e4f7",
+                    "inverse-on-surface": "#eef1f3",
+                    "tertiary-fixed-dim": "#bac8da",
+                    "on-tertiary-fixed-variant": "#3b4857",
+                    "on-primary-container": "#e1ecff",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#d1e1fa",
+                    "primary": "#005394",
+                    "on-secondary-container": "#556479"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "xl": "64px",
+                    "margin-mobile": "16px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        .bottom-sheet.active {
+            transform: translateY(0);
+        }
+        .glass-overlay {
+            backdrop-filter: blur(8px);
+            background-color: rgba(24, 28, 30, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Background Dashboard (Blurred) -->
+<div class="fixed inset-0 overflow-hidden filter blur-sm pointer-events-none">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile py-sm bg-surface shadow-sm border-b border-outline-variant">
+<div class="font-headline-md text-headline-md font-bold text-on-surface" style="opacity: 0;">Connexio</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">TP</div>
+</div>
+</header>
+<!-- Mock Dashboard Content -->
+<main class="pt-20 pb-32 px-margin-mobile max-w-5xl mx-auto space-y-lg">
+<div class="space-y-sm">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Pekerjaan Aktif</h1>
+<p class="font-body-md text-on-surface-variant">Maintenance BTS Area Jakarta Selatan - Site JKT-402</p>
+</div>
+<!-- Bento-ish Grid Mock -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl">
+<div class="font-label-md text-label-md text-primary mb-2">TELEMETRY</div>
+<div class="h-40 bg-surface-container rounded-lg"></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl">
+<div class="font-label-md text-label-md text-primary mb-2">NETWORK STATUS</div>
+<div class="h-40 bg-surface-container rounded-lg"></div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-2">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-4 py-2">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-sm text-label-sm">Request</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-2">
+<span class="material-symbols-outlined">assignment_return</span>
+<span class="font-label-sm text-label-sm">Return</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary px-4 py-2">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-label-sm text-label-sm">Dismantle</span>
+</div>
+</nav>
+</div>
+<!-- Overlay & Modal -->
+<div class="fixed inset-0 z-[60] glass-overlay flex items-end justify-center" id="modal-overlay">
+<!-- Bottom Sheet Modal -->
+<div class="bottom-sheet active w-full max-w-2xl bg-surface-container-lowest rounded-t-[32px] shadow-2xl p-margin-mobile md:p-lg" id="bottom-sheet">
+<!-- Drag Handle -->
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-lg"></div>
+<div class="flex justify-between items-center mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface">Detail Pengerjaan</h2>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+<div class="space-y-lg">
+<!-- Upload Section -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Upload Foto Bukti</label>
+<div class="group relative cursor-pointer border-2 border-dashed border-outline-variant hover:border-primary bg-surface-container-low hover:bg-surface-container-high rounded-xl p-lg transition-all duration-300">
+<input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" type="file">
+<div class="flex flex-col items-center justify-center gap-md py-md">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+</div>
+<div class="text-center">
+<p class="font-title-lg text-title-lg text-on-surface">Klik atau seret foto</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Format PNG, JPG max. 10MB</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Notes Section -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant" for="notes">Catatan</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-md font-body-md focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-outline" id="notes" placeholder="Tuliskan catatan teknis pengerjaan di sini..." rows="4"></textarea>
+</div>
+<!-- Status Context Card -->
+<div class="bg-secondary-container/30 border border-secondary-container p-md rounded-xl flex items-start gap-md">
+<span class="material-symbols-outlined text-primary">info</span>
+<div>
+<p class="font-label-md text-label-md text-primary">Informasi Penting</p>
+<p class="font-label-sm text-label-sm text-on-secondary-container">Pastikan semua kabel fiber optik telah di-tagging sebelum menekan konfirmasi selesai.</p>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-md pb-safe">
+<button class="w-full h-14 bg-primary-container text-on-primary-container font-label-md text-label-md rounded-xl flex items-center justify-center gap-md hover:brightness-110 active:scale-[0.98] transition-all" onclick="confirmAction()">
+<span class="material-symbols-outlined">check_circle</span>
+                        Konfirmasi Selesai
+                    </button>
+<button class="w-full h-14 mt-sm bg-transparent text-primary font-label-md text-label-md rounded-xl flex items-center justify-center hover:bg-surface-container-low transition-colors" onclick="closeModal()">
+                        Kembali
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        function closeModal() {
+            const sheet = document.getElementById('bottom-sheet');
+            const overlay = document.getElementById('modal-overlay');
+            sheet.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none';
+            }, 300);
+        }
+
+        function confirmAction() {
+            const btn = event.currentTarget;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Memproses...';
+            btn.disabled = true;
+            
+            // Mock success interaction
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">done_all</span> Berhasil Disimpan';
+                btn.classList.replace('bg-primary-container', 'bg-tertiary-container');
+                setTimeout(() => closeModal(), 1000);
+            }, 1500);
+        }
+
+        // Initialize modal open state
+        window.onload = () => {
+            const sheet = document.getElementById('bottom-sheet');
+            setTimeout(() => sheet.classList.add('active'), 100);
+        };
+    </script>
+
+
+</body></html>

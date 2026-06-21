@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#5e6b7b",
+                    "tertiary-fixed": "#d6e4f7",
+                    "secondary-fixed": "#d4e4fc",
+                    "secondary-container": "#d1e1fa",
+                    "surface-container-low": "#f1f4f6",
+                    "on-primary-fixed-variant": "#004881",
+                    "outline": "#727782",
+                    "on-tertiary-fixed-variant": "#3b4857",
+                    "surface-container": "#ebeef0",
+                    "secondary": "#515f74",
+                    "error-container": "#ffdad6",
+                    "primary": "#005394",
+                    "on-primary-fixed": "#001c38",
+                    "on-secondary-container": "#556479",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d7dadc",
+                    "on-tertiary-container": "#dfecff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#a2c9ff",
+                    "on-background": "#181c1e",
+                    "primary-container": "#2b6cb0",
+                    "surface": "#f7fafc",
+                    "on-tertiary-fixed": "#0f1d2a",
+                    "primary-fixed": "#d3e4ff",
+                    "on-surface-variant": "#414750",
+                    "surface-tint": "#1960a3",
+                    "inverse-on-surface": "#eef1f3",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface": "#181c1e",
+                    "surface-bright": "#f7fafc",
+                    "tertiary": "#465363",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary-fixed-dim": "#bac8da",
+                    "surface-container-high": "#e5e9eb",
+                    "inverse-primary": "#a2c9ff",
+                    "on-secondary-fixed": "#0d1c2e",
+                    "secondary-fixed-dim": "#b8c8e0",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-container": "#e1ecff",
+                    "on-primary": "#ffffff",
+                    "background": "#f7fafc",
+                    "outline-variant": "#c1c7d2",
+                    "on-secondary-fixed-variant": "#39485c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "base": "8px",
+                    "md": "24px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-active .accordion-content {
+            max-height: 300px;
+        }
+        .accordion-active .arrow-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-primary px-margin-mobile py-4 rounded-b-3xl shadow-lg">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3 text-white">
+<div class="w-12 h-12 rounded-full border-2 border-white/30 overflow-hidden">
+<img alt="Technician" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmRDI6Yr7dSKvUjzyy9FG7bVYwF9BjTAk-tVtOULg1bgQP5PTqr1VzqIF5SPJzZA06TGyCCICw6lofW1r9kmzddjpkE-4nUlLWw84WA0TanxGFPBJYUU585-EmJCrTmbIXFgEMPRjRuay4TejSRd4vE27mn_YZftQFkxjsyLWuMqbYKpciGy3k-luJKeQ7nP2hvoPSUNW2C2rTuTz3r7I5MwfALzPa6ZccATxiXzpCPi5c7ldA4P_4zwVpYwDYRx7NN41KXyWwu_s"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">Budi Santoso</span>
+<span class="text-[11px] opacity-80">Area: Jakarta Pusat</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<h1 class="font-headline-md text-white font-bold mr-2">Connexio</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="pt-20 px-margin-mobile">
+<section class="mb-lg">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-[#2B6CB0] mb-2">Daftar Tugas Dismantle</h2>
+<p class="text-on-surface-variant font-body-md">Selesaikan pelepasan perangkat infrastruktur sesuai jadwal penugasan hari ini.</p>
+</section><div class="mb-md">
+<button class="w-full h-[56px] bg-[#2B6CB0] text-white font-label-md rounded-lg active:scale-95 transition-transform flex items-center justify-center gap-2 shadow-md">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+        Buat Form Dismantling
+    </button>
+</div>
+<!-- Task List (Bento-inspired Accordions) -->
+<div class="flex flex-col gap-md">
+<!-- Accordion Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden transition-all duration-300 shadow-sm" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center cursor-pointer">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-sm uppercase tracking-wider mb-1">ID: CNX-99281</span>
+<h3 class="font-title-lg text-title-lg text-[#2B6CB0]">Ahmad Subarjo</h3>
+</div>
+<span class="material-symbols-outlined arrow-icon transition-transform text-[#2B6CB0]" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content border-t border-outline-variant bg-surface">
+<div class="p-md flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on">location_on</span>
+<p class="text-on-surface-variant">Jl. Kebon Jeruk No. 12, Jakarta Barat, DKI Jakarta 11530</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="inventory_2">inventory_2</span>
+<p class="text-on-surface-variant">1x ONT Router, 2x STB HD Premium</p>
+</div>
+<button class="w-full h-[56px] bg-[#2B6CB0] text-white font-label-md rounded-lg active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+                            Mulai Dismantling
+                        </button>
+</div>
+</div>
+</div>
+<!-- Accordion Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden transition-all duration-300 shadow-sm" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center cursor-pointer">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-sm uppercase tracking-wider mb-1">ID: CNX-88120</span>
+<h3 class="font-title-lg text-title-lg text-[#2B6CB0]">Siti Aminah</h3>
+</div>
+<span class="material-symbols-outlined arrow-icon transition-transform text-[#2B6CB0]" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content border-t border-outline-variant bg-surface">
+<div class="p-md flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on">location_on</span>
+<p class="text-on-surface-variant">Apartemen Medit 2, Tower Heliconia Lt. 15, Unit B, Jakarta Barat</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="inventory_2">inventory_2</span>
+<p class="text-on-surface-variant">1x ODP Splitter, 1x Modem Pro</p>
+</div>
+<button class="w-full h-[56px] bg-[#2B6CB0] text-white font-label-md rounded-lg active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+                            Mulai Dismantling
+                        </button>
+</div>
+</div>
+</div>
+<!-- Accordion Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden transition-all duration-300 shadow-sm" onclick="toggleAccordion(this)">
+<div class="p-md flex justify-between items-center cursor-pointer">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-sm uppercase tracking-wider mb-1">ID: CNX-77412</span>
+<h3 class="font-title-lg text-title-lg text-[#2B6CB0]">Bambang Wijaya</h3>
+</div>
+<span class="material-symbols-outlined arrow-icon transition-transform text-[#2B6CB0]" data-icon="expand_more">expand_more</span>
+</div>
+<div class="accordion-content border-t border-outline-variant bg-surface">
+<div class="p-md flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on">location_on</span>
+<p class="text-on-surface-variant">Perumahan Green Lake City, Cluster Australia Blok C8 No. 5</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="inventory_2">inventory_2</span>
+<p class="text-on-surface-variant">2x Mesh Extender, 1x Router G-Series</p>
+</div>
+<button class="w-full h-[56px] bg-[#2B6CB0] text-white font-label-md rounded-lg active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+                            Mulai Dismantling
+                        </button>
+</div>
+</div>
+</div>
+<!-- Image Section for Professional Feel -->
+<div class="mt-md rounded-xl overflow-hidden relative h-40">
+<img alt="Technician working" class="w-full h-full object-cover grayscale brightness-50" data-alt="A professional telecommunications technician in a soft blue uniform carefully dismantling electronic equipment from a clean white server rack. The lighting is soft and monochromatic blue, creating a calm and expert atmosphere. The background is a minimalist, modern office corridor with wide whitespace and premium materials. High-end executive aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOP6Dyob2cRnU3QbU_rmOIKmfrWeHiYmn7_Bk25VPo8Q529bpgEIVQp1QEw2AgP3icG5oqqMIdZuej05IGkaYs-pWokEctekbga9qI6m2UiJRI9_WoI_fdhWtqnmFpsTItnHYIzSlvqsKVRRiNF1y48dYVYne3y21JEnrLqYUxYZ_E-_7_kmpJp3rItggWBbkWbhrqaa5GEgEAGDhL1_0tKTnfDOMEJyDqRGUkv7Ov-jOVB12gOpqNuQWMy6zdy6ml3gMcwWTLfjQ"/>
+<div class="absolute inset-0 flex flex-col justify-end p-md bg-gradient-to-t from-primary/80 to-transparent">
+<p class="text-on-primary font-label-md">Pastikan semua alat kembali ke depo sebelum pukul 17.00 WIB.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm">Request</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-2 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_return">assignment_return</span>
+<span class="font-label-sm text-label-sm">Return</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl px-4 py-2 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-label-sm text-label-sm">Dismantle</span>
+</a>
+</nav>
+<script>
+        function toggleAccordion(element) {
+            // Close all other accordions first
+            const allAccordions = document.querySelectorAll('.bg-surface-container-lowest');
+            allAccordions.forEach(acc => {
+                if (acc !== element) {
+                    acc.classList.remove('accordion-active');
+                    acc.classList.remove('ring-2', 'ring-primary/20');
+                }
+            });
+
+            // Toggle current
+            element.classList.toggle('accordion-active');
+            if (element.classList.contains('accordion-active')) {
+                element.classList.add('ring-2', 'ring-primary/20');
+            } else {
+                element.classList.remove('ring-2', 'ring-primary/20');
+            }
+        }
+    </script>
+</body></html>
