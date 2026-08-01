@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
         Route::put('/customers/{id_pelanggan}', [CustomerController::class, 'update'])->name('customers.update');
         Route::delete('/customers/{id_pelanggan}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+
+        // Users (Admin Management)
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::put('/users/{id_user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{id_user}', [UserController::class, 'destroy'])->name('users.destroy');
 
         // Approvals / ACC
         Route::get('/approvals', [AssignmentController::class, 'pendingApprovals'])->name('approvals.index');

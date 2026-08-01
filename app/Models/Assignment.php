@@ -19,6 +19,7 @@ class Assignment extends Model
         'foto_bukti',
         'alasan_rusak',
         'keterangan',
+        'catatan_admin',
     ];
 
     public function customer(): BelongsTo

@@ -8,16 +8,50 @@ use Illuminate\Support\Facades\Auth;
 
 class DeviceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::user()->role === 'Teknisi') {
             abort(403, 'Unauthorized.');
         }
-        $devices = Device::with(['assignments.customer', 'assignments.teknisi'])
-            ->orderByRaw('CASE WHEN tanggal_pasang_awal IS NOT NULL THEN 0 ELSE 1 END')
-            ->orderBy('tanggal_pasang_awal', 'asc')
-            ->orderBy('created_at', 'desc')
-            ->get();
+
+        $query = Device::with(['assignments.customer', 'assignments.teknisi']);
+
+        // Filter by Search (SN or Jenis/Tipe)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('serial_number', 'like', "%{$search}%")
+                  ->orWhere('jenis_merek', 'like', "%{$search}%")
+                  ->orWhere('tipe_perangkat', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter by Status
+        if ($request->filled('status')) {
+            if ($request->status === 'Ready') {
+                $query->whereNull('status_kondisi');
+            } else {
+                $query->where('status_kondisi', $request->status);
+            }
+        }
+
+        // Sorting
+        $sortBy = $request->input('sort_by', 'default');
+        if ($sortBy === 'newest') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($sortBy === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sortBy === 'last_edited') {
+            $query->orderBy('updated_at', 'desc');
+        } else {
+            // Default sort (EWS style)
+            $query->orderByRaw('CASE WHEN tanggal_pasang_awal IS NOT NULL THEN 0 ELSE 1 END')
+                  ->orderBy('tanggal_pasang_awal', 'asc')
+                  ->orderBy('created_at', 'desc');
+        }
+
+        $devices = $query->get();
+
         return view('admin.devices', compact('devices'));
     }
 
@@ -48,6 +82,10 @@ class DeviceController extends Controller
         }
 
         $device = Device::findOrFail($serial_number);
+
+        if (in_array($device->status_kondisi, ['Terpasang', 'Dismantling', 'Rusak'])) {
+            return redirect()->route('admin.devices.index')->with('error', 'Perangkat tidak bisa diedit karena statusnya ' . $device->status_kondisi . '.');
+        }
 
         $request->validate([
             'jenis_merek' => 'required|string|in:STB Huawei,STB ZTE,Modem ZTE,Modem Huawei',

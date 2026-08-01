@@ -66,9 +66,14 @@ class DashboardController extends Controller
         }
         $techId = Auth::id();
 
-        // 1. Fetch technician tasks
-        // We want to show their assignments (recent or active)
+        // 1. Fetch technician tasks (Filter: Today's tasks + Active Pending/In-Hand tasks)
+        $today = Carbon::today();
         $assignmentsRaw = Assignment::where('id_teknisi', $techId)
+            ->where(function($q) use ($today) {
+                $q->whereDate('created_at', $today)
+                  ->orWhereDate('updated_at', $today)
+                  ->orWhereIn('status_approval', ['Pending', 'In_Hand']);
+            })
             ->with(['customer', 'device'])
             ->orderBy('updated_at', 'desc')
             ->get();
@@ -78,10 +83,10 @@ class DashboardController extends Controller
             return $item->id_pelanggan . '_' . $item->tipe_alur . '_' . $item->status_approval . '_' . $item->keterangan;
         });
 
-        // 2. Counts for technician analytics cards
+        // 2. Counts for technician analytics cards (Active backlog + Today's completed)
         $pendingCount = Assignment::where('id_teknisi', $techId)->where('status_approval', 'Pending')->count();
         $inHandCount = Assignment::where('id_teknisi', $techId)->where('status_approval', 'In_Hand')->count();
-        $completedCount = Assignment::where('id_teknisi', $techId)->where('status_approval', 'Approved_by_Admin')->count();
+        $completedCount = Assignment::where('id_teknisi', $techId)->where('status_approval', 'Approved_by_Admin')->whereDate('updated_at', $today)->count();
 
         // List of all active customers for the request deployment dropdown
         $customers = Customer::where('status_langganan', 'Active')->get();

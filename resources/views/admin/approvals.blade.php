@@ -105,12 +105,16 @@
                                 <button type="button" onclick="addAdminSnRow('{{ $deploy->id_transaksi }}')" class="text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 w-max">
                                     <span class="material-symbols-outlined text-sm">add_circle</span> Tambah Perangkat
                                 </button>
+                                <div class="mt-3">
+                                    <textarea name="catatan_admin" id="catatan-deploy-{{ $deploy->id_transaksi }}" rows="1" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs focus:border-secondary transition-all outline-none" placeholder="Catatan untuk teknisi (opsional)..." form="approve-deploy-{{ $deploy->id_transaksi }}"></textarea>
+                                </div>
                             </form>
                         </td>
-                        <td class="px-6 py-4 text-right">
+                        <td class="px-6 py-4 text-right align-bottom">
                             <div class="flex gap-2 justify-end">
-                                <form action="{{ route('admin.approvals.reject', $deploy->id_transaksi) }}" method="POST" style="margin: 0;">
+                                <form action="{{ route('admin.approvals.reject', $deploy->id_transaksi) }}" method="POST" style="margin: 0;" onsubmit="this.catatan_admin.value = document.getElementById('catatan-deploy-{{ $deploy->id_transaksi }}').value">
                                     @csrf
+                                    <input type="hidden" name="catatan_admin">
                                     <button type="submit" 
                                             class="h-10 px-4 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-xl text-xs font-bold transition-all">
                                         Tolak
@@ -174,17 +178,20 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 text-xs text-slate-500 font-semibold italic">"{{ $ret->alasan_rusak }}"</td>
-                        <td class="px-6 py-4 text-right">
+                        <td class="px-6 py-4 align-top">
+                            <textarea id="catatan-return-{{ $ret->id_transaksi }}" rows="1" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs focus:border-secondary transition-all outline-none mb-2" placeholder="Catatan untuk teknisi..."></textarea>
                             <div class="flex gap-2 justify-end">
-                                <form action="{{ route('admin.approvals.reject', $ret->id_transaksi) }}" method="POST" style="margin: 0;">
+                                <form action="{{ route('admin.approvals.reject', $ret->id_transaksi) }}" method="POST" style="margin: 0;" onsubmit="this.catatan_admin.value = document.getElementById('catatan-return-{{ $ret->id_transaksi }}').value">
                                     @csrf
+                                    <input type="hidden" name="catatan_admin">
                                     <button type="submit" 
                                             class="h-10 px-4 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-xl text-xs font-bold transition-all">
                                         Tolak
                                     </button>
                                 </form>
-                                <form action="{{ route('admin.approvals.approve-return', $ret->id_transaksi) }}" method="POST" style="margin: 0;">
+                                <form action="{{ route('admin.approvals.approve-return', $ret->id_transaksi) }}" method="POST" style="margin: 0;" onsubmit="this.catatan_admin.value = document.getElementById('catatan-return-{{ $ret->id_transaksi }}').value">
                                     @csrf
+                                    <input type="hidden" name="catatan_admin">
                                     <button type="submit" 
                                             class="h-10 px-4 bg-primary text-white hover:bg-secondary rounded-xl text-xs font-bold transition-all shadow-sm">
                                         ACC Pengembalian
@@ -242,17 +249,20 @@
                                 <span class="text-xs text-slate-400 italic">Tidak ada foto</span>
                             @endif
                         </td>
-                        <td class="px-6 py-4 text-right">
+                        <td class="px-6 py-4 align-top">
+                            <textarea id="catatan-dismantle-{{ $dismantle->id_transaksi }}" rows="1" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs focus:border-secondary transition-all outline-none mb-2" placeholder="Catatan untuk teknisi..."></textarea>
                             <div class="flex gap-2 justify-end">
-                                <form action="{{ route('admin.approvals.reject', $dismantle->id_transaksi) }}" method="POST" style="margin: 0;">
+                                <form action="{{ route('admin.approvals.reject', $dismantle->id_transaksi) }}" method="POST" style="margin: 0;" onsubmit="this.catatan_admin.value = document.getElementById('catatan-dismantle-{{ $dismantle->id_transaksi }}').value">
                                     @csrf
+                                    <input type="hidden" name="catatan_admin">
                                     <button type="submit" 
                                             class="h-10 px-4 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-xl text-xs font-bold transition-all">
                                         Tolak
                                     </button>
                                 </form>
-                                <form action="{{ route('admin.approvals.approve-dismantle', $dismantle->id_transaksi) }}" method="POST" style="margin: 0;">
+                                <form action="{{ route('admin.approvals.approve-dismantle', $dismantle->id_transaksi) }}" method="POST" style="margin: 0;" onsubmit="this.catatan_admin.value = document.getElementById('catatan-dismantle-{{ $dismantle->id_transaksi }}').value">
                                     @csrf
+                                    <input type="hidden" name="catatan_admin">
                                     <button type="submit" 
                                             class="h-10 px-4 bg-primary text-white hover:bg-secondary rounded-xl text-xs font-bold transition-all shadow-sm">
                                         ACC Dismantling
@@ -270,6 +280,90 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- SECTION 4: APPROVAL HISTORY -->
+<div class="glass-card rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(30,58,138,0.03)] border border-slate-100 bg-white mb-8">
+    <div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-500 text-2xl">history</span>
+            <h2 class="text-lg font-bold text-slate-700">Log History Approval</h2>
+        </div>
+    </div>
+    
+    <!-- Filters -->
+    <div class="p-4 bg-slate-50 border-b border-slate-100">
+        <form method="GET" action="{{ route('admin.approvals.index') }}" class="flex flex-wrap gap-3">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Pelanggan/Teknisi..." 
+                   class="flex-1 min-w-[200px] h-10 border border-slate-200 rounded-xl px-4 text-sm focus:border-secondary outline-none">
+            
+            <select name="tipe_alur" class="h-10 border border-slate-200 rounded-xl px-4 text-sm focus:border-secondary outline-none">
+                <option value="">Semua Tipe Alur</option>
+                <option value="Pengambilan" {{ request('tipe_alur') === 'Pengambilan' ? 'selected' : '' }}>Deployment</option>
+                <option value="Pengembalian" {{ request('tipe_alur') === 'Pengembalian' ? 'selected' : '' }}>Return</option>
+                <option value="Dismantling" {{ request('tipe_alur') === 'Dismantling' ? 'selected' : '' }}>Dismantle</option>
+            </select>
+
+            <select name="sort_by" class="h-10 border border-slate-200 rounded-xl px-4 text-sm focus:border-secondary outline-none">
+                <option value="newest" {{ request('sort_by') === 'newest' ? 'selected' : '' }}>Terbaru</option>
+                <option value="oldest" {{ request('sort_by') === 'oldest' ? 'selected' : '' }}>Terlama</option>
+            </select>
+
+            <button type="submit" class="h-10 bg-primary/10 text-primary font-bold px-4 rounded-xl hover:bg-primary/20 transition-all flex items-center gap-1 text-sm">
+                <span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+            </button>
+            @if(request()->anyFilled(['search', 'tipe_alur', 'sort_by']))
+                <a href="{{ route('admin.approvals.index') }}" class="h-10 text-slate-500 font-bold px-4 rounded-xl hover:bg-slate-100 transition-all flex items-center gap-1 text-sm">Reset</a>
+            @endif
+        </form>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left">
+            <thead>
+                <tr class="bg-slate-50/50">
+                    <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Tanggal</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Tipe</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Teknisi / Pelanggan</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Catatan Admin</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                @forelse($history as $hist)
+                    <tr class="hover:bg-slate-50/30 transition-colors">
+                        <td class="px-6 py-4 text-xs text-slate-500 font-medium">{{ $hist->updated_at->format('d M y H:i') }}</td>
+                        <td class="px-6 py-4 text-xs font-bold text-slate-700">{{ $hist->tipe_alur }}</td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm font-bold text-slate-700">{{ $hist->teknisi->nama_jelas ?? '-' }}</div>
+                            <div class="text-xs text-slate-400 font-semibold">{{ $hist->customer->nama_pelanggan ?? '-' }}</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            @if($hist->status_approval === 'Approved_by_Admin')
+                                <span class="px-2 py-1 bg-green-50 text-green-700 border border-green-200 rounded-lg text-xs font-bold">Approved</span>
+                            @elseif($hist->status_approval === 'Rejected')
+                                <span class="px-2 py-1 bg-red-50 text-red-700 border border-red-200 rounded-lg text-xs font-bold">Rejected</span>
+                            @else
+                                <span class="px-2 py-1 bg-slate-50 text-slate-700 border border-slate-200 rounded-lg text-xs font-bold">{{ str_replace('_', ' ', $hist->status_approval) }}</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-xs text-slate-600 italic">
+                            {{ $hist->catatan_admin ?: '-' }}
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center text-slate-400 py-12 text-sm">
+                            Tidak ada log history.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    <div class="p-4 border-t border-slate-100">
+        {{ $history->links('pagination::tailwind') }}
     </div>
 </div>
 

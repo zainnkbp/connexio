@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class AssignmentController extends Controller
 {
     // Admin list of pending assignments for approvals
-    public function pendingApprovals()
+    public function pendingApprovals(Request $request)
     {
         // 1. Pending deployment requests (status_approval = Pending, tipe_alur = Pengambilan, serial_number = null)
         $deployments = Assignment::where('tipe_alur', 'Pengambilan')
@@ -33,13 +33,42 @@ class AssignmentController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        // 4. History log (status != Pending) with filter
+        $historyQuery = Assignment::where('status_approval', '!=', 'Pending')->with(['customer', 'teknisi']);
+        
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $historyQuery->where(function($q) use ($search) {
+                $q->whereHas('customer', function($q2) use ($search) {
+                    $q2->where('nama_pelanggan', 'like', "%{$search}%")
+                       ->orWhere('id_pelanggan', 'like', "%{$search}%");
+                })->orWhereHas('teknisi', function($q3) use ($search) {
+                    $q3->where('nama_jelas', 'like', "%{$search}%");
+                });
+            });
+        }
+        
+        if ($request->filled('tipe_alur')) {
+            $historyQuery->where('tipe_alur', $request->tipe_alur);
+        }
+        
+        $sortBy = $request->input('sort_by', 'newest');
+        if ($sortBy === 'newest') {
+            $historyQuery->orderBy('updated_at', 'desc');
+        } else {
+            $historyQuery->orderBy('updated_at', 'asc');
+        }
+        
+        // Paginate history for performance
+        $history = $historyQuery->paginate(20)->withQueryString();
+
         // List of all ready/available devices in gudang for deployment assignment
         $availableDevices = Device::whereNull('status_kondisi')->get();
 
         // List of technicians for direct assignment dropdown
         $technicians = \App\Models\User::where('role', 'Teknisi')->get();
 
-        return view('admin.approvals', compact('deployments', 'returns', 'dismantles', 'availableDevices', 'technicians'));
+        return view('admin.approvals', compact('deployments', 'returns', 'dismantles', 'history', 'availableDevices', 'technicians'));
     }
 
     // Admin approves deployment request (Assigns a device)
@@ -93,6 +122,7 @@ class AssignmentController extends Controller
                 // Assign serial number, status remains Pending but with SN assigned (Ready to Pick Up)
                 $firstAssignment->update([
                     'serial_number' => $sn,
+                    'catatan_admin' => $request->input('catatan_admin', null),
                 ]);
                 $isFirst = false;
             } else {
@@ -104,6 +134,7 @@ class AssignmentController extends Controller
                     'tipe_alur' => 'Pengambilan',
                     'status_approval' => 'Pending', // Ready to pick up
                     'keterangan' => $firstAssignment->keterangan,
+                    'catatan_admin' => $request->input('catatan_admin', null),
                 ]);
             }
         }
@@ -116,7 +147,8 @@ class AssignmentController extends Controller
     {
         $assignment = Assignment::findOrFail($id);
         $assignment->update([
-            'status_approval' => 'Rejected'
+            'status_approval' => 'Rejected',
+            'catatan_admin' => $request->input('catatan_admin', null),
         ]);
 
         return redirect()->route('admin.approvals.index')->with('success', 'Transaksi berhasil ditolak.');
@@ -129,7 +161,8 @@ class AssignmentController extends Controller
         
         // Update assignment
         $assignment->update([
-            'status_approval' => 'Approved_by_Admin'
+            'status_approval' => 'Approved_by_Admin',
+            'catatan_admin' => $request->input('catatan_admin', null),
         ]);
 
         // Update device status to Rusak
@@ -153,7 +186,8 @@ class AssignmentController extends Controller
         
         // Update assignment
         $assignment->update([
-            'status_approval' => 'Approved_by_Admin'
+            'status_approval' => 'Approved_by_Admin',
+            'catatan_admin' => $request->input('catatan_admin', null),
         ]);
 
         // Update device status to Dismantling

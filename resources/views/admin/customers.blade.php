@@ -14,12 +14,16 @@
             <span class="material-symbols-outlined text-sm text-secondary">group</span>
             <span><strong class="text-primary">{{ $customers->count() }}</strong> total pelanggan terdaftar</span>
         </div>
-        <!-- Search Box -->
         <div class="relative">
             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
             <input type="text" id="customer-search" placeholder="Cari nama / ID / telepon..."
                    class="pl-9 pr-4 h-9 border border-slate-200 rounded-xl text-sm focus:border-secondary focus:ring-4 focus:ring-secondary/15 transition-all outline-none w-64">
         </div>
+        <!-- Bulk Import Button -->
+        <a href="{{ route('admin.import.show') }}" class="flex items-center gap-2 px-4 py-2 bg-secondary/10 text-secondary rounded-xl text-sm font-bold hover:bg-secondary/20 transition-all shadow-sm">
+            <span class="material-symbols-outlined text-[18px]">publish</span>
+            Bulk Import
+        </a>
     </div>
 </header>
 

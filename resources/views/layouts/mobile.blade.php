@@ -5,11 +5,11 @@
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
     <title>@yield('title', 'Connexio - Dashboard Teknisi')</title>
     <!-- Material Symbols -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/material-symbols.css') }}">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -211,33 +211,50 @@
 
 <!-- Main content -->
 <main class="mt-24 px-margin-mobile md:px-margin-desktop space-y-lg max-w-7xl mx-auto">
-    <!-- Success/Error alert alerts -->
+    <!-- Success/Error alert alerts with SweetAlert2 -->
     @if(session('success'))
-        <div class="p-4 bg-blue-50 border border-blue-200 text-blue-700 rounded-xl text-body-sm font-semibold flex items-center gap-2">
-            <span class="material-symbols-outlined">check_circle</span>
-            <div>{{ session('success') }}</div>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#005394'
+                });
+            });
+        </script>
     @endif
 
     @if(session('error'))
-        <div class="p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-body-sm font-semibold flex items-center gap-2">
-            <span class="material-symbols-outlined">error</span>
-            <div>{{ session('error') }}</div>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Kesalahan',
+                    text: '{{ session('error') }}',
+                    confirmButtonColor: '#ba1a1a'
+                });
+            });
+        </script>
     @endif
 
     @if($errors->any())
-        <div class="p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-body-sm font-semibold flex flex-col gap-1">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined">error</span>
-                <div class="font-bold">Terjadi Kesalahan Input:</div>
-            </div>
-            <ul class="list-disc list-inside text-xs pl-6 space-y-0.5">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan Input',
+                    html: `
+                        <ul style="text-align: left; margin-left: 20px;">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    `,
+                    confirmButtonColor: '#ba1a1a'
+                });
+            });
+        </script>
     @endif
 
     @yield('content')

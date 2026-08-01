@@ -146,6 +146,13 @@
                             </div>
                         @endif
 
+                        @if($assign->catatan_admin)
+                            <div class="flex items-start gap-2 p-2 bg-amber-50/50 rounded-lg border border-amber-100 mt-2">
+                                <span class="material-symbols-outlined text-sm text-amber-500 mt-0.5">notification_important</span>
+                                <div><strong class="text-amber-800">Catatan dari Admin:</strong> <span class="italic text-amber-700 block mt-0.5">{{ $assign->catatan_admin }}</span></div>
+                            </div>
+                        @endif
+
                         @if($assign->status_approval === 'Approved_by_Admin')
                             <div class="pt-3 border-t border-slate-100">
                                 <span class="px-2 py-1 bg-green-50 text-green-700 font-bold text-[10px] rounded inline-flex items-center gap-1">

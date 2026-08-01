@@ -90,16 +90,44 @@
             <!-- Summary badges -->
             <div class="flex gap-2">
                 <span class="px-2 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">
-                    {{ $devices->whereNull('status_kondisi')->count() }} Ready
+                    {{ \App\Models\Device::whereNull('status_kondisi')->count() }} Ready
                 </span>
                 <span class="px-2 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
-                    {{ $devices->where('status_kondisi', 'Terpasang')->count() }} Terpasang
+                    {{ \App\Models\Device::where('status_kondisi', 'Terpasang')->count() }} Terpasang
                 </span>
                 <span class="px-2 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">
-                    {{ $devices->where('status_kondisi', 'Rusak')->count() }} Rusak
+                    {{ \App\Models\Device::where('status_kondisi', 'Rusak')->count() }} Rusak
                 </span>
             </div>
         </div>
+
+        <!-- Filter Form -->
+        <form method="GET" action="{{ route('admin.devices.index') }}" class="mb-4 flex flex-wrap gap-3">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari SN / Jenis..." 
+                   class="flex-1 min-w-[200px] h-10 border border-slate-200 rounded-xl px-4 text-sm focus:border-secondary outline-none">
+            
+            <select name="status" class="h-10 border border-slate-200 rounded-xl px-4 text-sm focus:border-secondary outline-none">
+                <option value="">Semua Status</option>
+                <option value="Ready" {{ request('status') === 'Ready' ? 'selected' : '' }}>Ready</option>
+                <option value="Terpasang" {{ request('status') === 'Terpasang' ? 'selected' : '' }}>Terpasang</option>
+                <option value="Rusak" {{ request('status') === 'Rusak' ? 'selected' : '' }}>Rusak</option>
+                <option value="Dismantling" {{ request('status') === 'Dismantling' ? 'selected' : '' }}>Dismantled</option>
+            </select>
+
+            <select name="sort_by" class="h-10 border border-slate-200 rounded-xl px-4 text-sm focus:border-secondary outline-none">
+                <option value="default" {{ request('sort_by') === 'default' ? 'selected' : '' }}>Urut EWS (Default)</option>
+                <option value="last_edited" {{ request('sort_by') === 'last_edited' ? 'selected' : '' }}>Terakhir Diedit</option>
+                <option value="newest" {{ request('sort_by') === 'newest' ? 'selected' : '' }}>Baru Ditambahkan</option>
+                <option value="oldest" {{ request('sort_by') === 'oldest' ? 'selected' : '' }}>Lama Ditambahkan</option>
+            </select>
+
+            <button type="submit" class="h-10 bg-primary/10 text-primary font-bold px-4 rounded-xl hover:bg-primary/20 transition-all flex items-center gap-1 text-sm">
+                <span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+            </button>
+            @if(request()->anyFilled(['search', 'status', 'sort_by']) && request('sort_by') !== 'default')
+                <a href="{{ route('admin.devices.index') }}" class="h-10 text-slate-500 font-bold px-4 rounded-xl hover:bg-slate-100 transition-all flex items-center gap-1 text-sm">Reset</a>
+            @endif
+        </form>
 
         <div class="overflow-x-auto">
             <table class="w-full text-left">
@@ -110,6 +138,7 @@
                         <th class="px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Tipe</th>
                         <th class="px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
                         <th class="px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Pelanggan</th>
+                        <th class="px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Tgl Edit</th>
                         <th class="px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -146,6 +175,9 @@
                                     <span class="text-slate-300">—</span>
                                 @endif
                             </td>
+                            <td class="px-4 py-3 text-xs text-slate-500 font-medium">
+                                {{ $device->updated_at ? $device->updated_at->format('d M y H:i') : '—' }}
+                            </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-center gap-1">
                                     <!-- Detail Button -->
@@ -168,16 +200,22 @@
                                         <span class="material-symbols-outlined text-base">visibility</span>
                                     </button>
                                     <!-- Edit Button -->
-                                    <button type="button"
-                                            onclick="openEditModal({{ json_encode([
-                                                'serial_number' => $device->serial_number,
-                                                'jenis_merek' => $device->jenis_merek,
-                                                'tipe_perangkat' => $device->tipe_perangkat,
-                                                'alasan_rusak' => $device->alasan_rusak ?? '',
-                                            ]) }})"
-                                            class="w-8 h-8 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary flex items-center justify-center transition-all" title="Edit Data">
-                                        <span class="material-symbols-outlined text-base">edit</span>
-                                    </button>
+                                    @if(!in_array($device->status_kondisi, ['Terpasang', 'Dismantling', 'Rusak']))
+                                        <button type="button"
+                                                onclick="openEditModal({{ json_encode([
+                                                    'serial_number' => $device->serial_number,
+                                                    'jenis_merek' => $device->jenis_merek,
+                                                    'tipe_perangkat' => $device->tipe_perangkat,
+                                                    'alasan_rusak' => $device->alasan_rusak ?? '',
+                                                ]) }})"
+                                                class="w-8 h-8 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary flex items-center justify-center transition-all" title="Edit Data">
+                                            <span class="material-symbols-outlined text-base">edit</span>
+                                        </button>
+                                    @else
+                                        <div class="w-8 h-8 rounded-lg bg-slate-50 text-slate-300 flex items-center justify-center cursor-not-allowed" title="Tidak bisa diedit, status perangkat: {{ $device->status_kondisi }}">
+                                            <span class="material-symbols-outlined text-base">edit_off</span>
+                                        </div>
+                                    @endif
                                     <!-- Delete Button -->
                                     @if($device->status_kondisi !== 'Terpasang')
                                         <button type="button"

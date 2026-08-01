@@ -5,9 +5,15 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>@yield('title', 'Connexio Executive Console')</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="icon" type="image/png" href="{{ asset('logo') }}/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('logo') }}/favicon.svg" />
+    <link rel="shortcut icon" href="{{ asset('logo') }}/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logo') }}/apple-touch-icon.png" />
+    <link rel="manifest" href="{{ asset('logo') }}/site.webmanifest" />
+    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/material-symbols.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -127,8 +133,8 @@
 
 <!-- SideNavBar -->
 <aside class="w-[72px] h-screen fixed left-0 top-0 bg-surface/70 backdrop-blur-xl border-r border-outline-variant/30 shadow-[0px_4px_20px_rgba(30,58,138,0.05)] flex flex-col items-center py-lg z-50">
-    <div class="mb-xl">
-        <span class="material-symbols-outlined text-primary font-headline-lg text-3xl font-bold">account_balance</span>
+   <div class="mb-xl">
+        <img src="{{ asset('logo') }}/favicon.svg" alt="Description of the image">
     </div>
     <nav class="flex flex-col gap-sm flex-1">
         <!-- Dashboard EWS -->
@@ -149,17 +155,17 @@
            title="Pool Perangkat Gudang">
             <span class="material-symbols-outlined">inventory_2</span>
         </a>
-        <!-- Bulk Import -->
-        <a href="{{ route('admin.import.show') }}" 
-           class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 {{ request()->routeIs('admin.import.show') || request()->routeIs('admin.import.parse') ? 'text-primary border-r-2 border-primary bg-primary/5' : 'text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary' }}"
-           title="Bulk Import Pelanggan">
-            <span class="material-symbols-outlined">publish</span>
-        </a>
         <!-- Pelanggan -->
         <a href="{{ route('admin.customers.index') }}" 
            class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 {{ request()->routeIs('admin.customers.index') ? 'text-primary border-r-2 border-primary bg-primary/5' : 'text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary' }}"
            title="Manajemen Pelanggan">
             <span class="material-symbols-outlined">group</span>
+        </a>
+        <!-- Pengguna (Admin) -->
+        <a href="{{ route('admin.users.index') }}" 
+           class="w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-0.5 {{ request()->routeIs('admin.users.*') ? 'text-primary border-r-2 border-primary bg-primary/5' : 'text-on-surface-variant/60 hover:bg-primary/5 hover:text-primary' }}"
+           title="Kelola Pengguna">
+            <span class="material-symbols-outlined">manage_accounts</span>
         </a>
     </nav>
 </aside>
@@ -173,7 +179,7 @@
             <a class="{{ request()->routeIs('admin.approvals.index') ? 'text-primary font-bold' : 'text-on-surface-variant/80' }} font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="{{ route('admin.approvals.index') }}">Persetujuan</a>
             <a class="{{ request()->routeIs('admin.devices.index') ? 'text-primary font-bold' : 'text-on-surface-variant/80' }} font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="{{ route('admin.devices.index') }}">Pool Perangkat</a>
             <a class="{{ request()->routeIs('admin.customers.index') ? 'text-primary font-bold' : 'text-on-surface-variant/80' }} font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="{{ route('admin.customers.index') }}">Pelanggan</a>
-            <a class="{{ request()->routeIs('admin.import.show') || request()->routeIs('admin.import.parse') ? 'text-primary font-bold' : 'text-on-surface-variant/80' }} font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="{{ route('admin.import.show') }}">Bulk Import</a>
+            <a class="{{ request()->routeIs('admin.users.*') ? 'text-primary font-bold' : 'text-on-surface-variant/80' }} font-body-lg text-body-lg hover:text-primary transition-colors duration-200" href="{{ route('admin.users.index') }}">Pengguna</a>
         </div>
     </div>
     
@@ -199,33 +205,50 @@
 
 <!-- Main Content Wrapper -->
 <main class="ml-[72px] mt-16 p-lg max-w-container-max mx-auto">
-    <!-- Notifications / Alerts -->
+    <!-- Notifications / Alerts with SweetAlert2 -->
     @if(session('success'))
-        <div class="mb-sm p-sm bg-blue-50 border border-blue-200 text-blue-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">check_circle</span>
-            <div class="text-body-sm font-semibold">{{ session('success') }}</div>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#005394'
+                });
+            });
+        </script>
     @endif
 
     @if(session('error'))
-        <div class="mb-sm p-sm bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">error</span>
-            <div class="text-body-sm font-semibold">{{ session('error') }}</div>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Kesalahan',
+                    text: '{{ session('error') }}',
+                    confirmButtonColor: '#ba1a1a'
+                });
+            });
+        </script>
     @endif
 
     @if($errors->any())
-        <div class="mb-sm p-sm bg-red-50 border border-red-200 text-red-700 rounded-lg flex flex-col gap-1">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined">error</span>
-                <div class="text-body-sm font-bold">Terjadi Kesalahan Input:</div>
-            </div>
-            <ul class="list-disc list-inside text-xs font-semibold pl-6 space-y-0.5">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan Input',
+                    html: `
+                        <ul style="text-align: left; margin-left: 20px;">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    `,
+                    confirmButtonColor: '#ba1a1a'
+                });
+            });
+        </script>
     @endif
 
     @yield('content')
